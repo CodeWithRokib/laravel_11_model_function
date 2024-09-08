@@ -72,4 +72,9 @@ class Product extends Model
         return $product->forceDelete(); // Use forceDelete() for hard delete
     }
 
+    public static function totalActiveQuantity(): int
+{
+    return self::where('status', 1)->sum('quantity');
+}
+
 }

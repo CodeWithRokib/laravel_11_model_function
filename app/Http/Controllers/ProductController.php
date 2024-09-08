@@ -13,13 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        // Get paginated results
-        $products = Product::paginate(10);
-        $totalQuantity = Product::sum('quantity');
-
-        return view('practice.product.index ', compact('products','totalQuantity'));
+        // Fetch all products for listing
+        $products = Product::where('status', 1)->paginate(10);
+    
+        // Get the total quantity of active products
+        $totalQuantity = Product::totalActiveQuantity();
+    
+        return view('practice.product.index', compact('products', 'totalQuantity'));
     }
     public function create(){
         return view('practice.product.create');
