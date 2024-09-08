@@ -53,7 +53,7 @@
                         {{ $products->links() }}
                     @endif
                     <p>Total Quantity: {{ $totalQuantity }}</p>
-                    {{-- <p>Total Price: {{ $totalAmount }}</p> --}}
+                    <p>Total Price: {{ $totalPrice }}</p>
                 </div>
             </div>
         </div>

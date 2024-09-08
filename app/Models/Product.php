@@ -73,8 +73,21 @@ class Product extends Model
     }
 
     public static function totalActiveQuantity(): int
-{
+    {
     return self::where('status', 1)->sum('quantity');
-}
+    }
+
+
+    public static function totalActivePrice(): int
+    {
+    return self::where('status', 1)->sum('price');
+    }
+
+    public function getNameAttribute($value)
+    {
+        return strtoupper($value); 
+    }
+
+
 
 }

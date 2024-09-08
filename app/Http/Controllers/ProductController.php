@@ -20,8 +20,9 @@ class ProductController extends Controller
     
         // Get the total quantity of active products
         $totalQuantity = Product::totalActiveQuantity();
+        $totalPrice = Product::totalActivePrice();
     
-        return view('practice.product.index', compact('products', 'totalQuantity'));
+        return view('practice.product.index', compact('products', 'totalQuantity','totalPrice'));
     }
     public function create(){
         return view('practice.product.create');
