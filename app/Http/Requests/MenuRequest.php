@@ -22,7 +22,6 @@ class MenuRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'menu_id'    => 'nullable|integer|exists:menus,id',  // The foreign key for the menu
             'name'           => 'required|string|max:500',
             'route'          => 'required|string|min:0',
             'icon'           => 'required|string|min:0',

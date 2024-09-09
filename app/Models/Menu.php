@@ -45,12 +45,12 @@ class Menu extends Model
              * @throws ValidationException
              */
 
-            public static function updateMenu(Menu $menu, array $data): bool
+            final public function updateMenu(Request $request, Memu|Model $menu): bool
             {
-                return $menu->update($data);
+                return $menu->update($this->prepare_data($request));
             }
 
-            public static function deleteMenu(Menu $menu): bool
+            final public function deleteMenu(Menu $menu): bool
             {
                 return $menu->forceDelete(); // Use forceDelete() for hard delete
             }

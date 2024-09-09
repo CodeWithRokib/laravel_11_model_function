@@ -73,9 +73,18 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Menu $menu): RedirectResponse
     {
-        
+        try {
+            // $validatedData = $request->validated();
+            DB::beginTransaction();
+            (new Menu())->updateMenu($request, $menu);
+            DB::commit();
+            return redirect()->route('menus.index')->with('success', 'Menu created successfully!');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to create product: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -84,10 +93,14 @@ class MenuController extends Controller
     public function destroy(Menu $menu): RedirectResponse
     {
         try {
-            Menu::deleteMenu($menu);
-            return redirect()->route('menus.index')->with('success', 'Menu deleted successfully!');
+            // $validatedData = $request->validated();
+            DB::beginTransaction();
+            (new Menu())->deleteMenu($menu);
+            DB::commit();
+            return redirect()->route('menus.index')->with('success', 'Menu created successfully!');
         } catch (\Throwable $e) {
-            return redirect()->back()->with('error', 'Failed to delete menu : ' . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Failed to create product: ' . $e->getMessage());
         }
     }
 }

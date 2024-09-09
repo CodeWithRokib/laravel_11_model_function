@@ -20,10 +20,9 @@ class ProductController extends Controller
         // Fetch all products for listing
         $products = Product::where('status', 1)->paginate(10);
     
-        // Get the total quantity of active products
-        $totalQuantity = Product::totalActiveQuantity();
-        $totalPrice = Product::totalActivePrice();
-    
+        $totalQuantity = (new Product())->totalActiveQuantity();
+        $totalPrice = (new Product())->totalActivePrice();
+
         return view('practice.product.index', compact('products', 'totalQuantity','totalPrice'));
     }
     public function create(){
