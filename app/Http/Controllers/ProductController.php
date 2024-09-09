@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 
 
-
 class ProductController extends Controller
 {
     public function index()
@@ -90,7 +89,7 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         try {
-            
+
             DB::beginTransaction();
             (new Product())->updateProduct($request, $product);
             DB::commit();

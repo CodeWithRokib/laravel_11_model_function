@@ -68,7 +68,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         return view('practice.menu.edit',compact('menu'));
-    }
+    } 
 
     /**
      * Update the specified resource in storage.
