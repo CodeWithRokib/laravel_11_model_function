@@ -41,6 +41,14 @@ class ProductController extends Controller
             DB::beginTransaction();
             $product = Product::storeProduct($validatedData);
             DB::commit();
+            // DB::beginTransaction();
+            // $menu     = (new Menu())->store_menu($request);
+            // $original = $menu->getOriginal();
+            // $changed  = $menu->getChanges();
+            // self::activityLog($request, $original, $changed, $menu);
+            // success_alert('Menu created successfully');
+            // DB::commit();
+            // return redirect()->route('menu.index');
             return redirect()->route('products.index')->with('success', 'Product created successfully!');
         } catch (\Throwable $e) {
             DB::rollBack();

@@ -77,7 +77,7 @@ class Product extends Model
     return self::where('status', 1)->sum('quantity');
     }
 
-
+    
     public static function totalActivePrice(): int
     {
     return self::where('status', 1)->sum('price');
@@ -85,7 +85,7 @@ class Product extends Model
 
     public function getNameAttribute($value)
     {
-        return strtoupper($value); 
+        return strtoupper($value); // Ensure name is always in uppercase
     }
 
 
