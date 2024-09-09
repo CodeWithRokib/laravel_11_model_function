@@ -37,4 +37,9 @@ class Menu extends Model
                 return $menu->update($data);
             }
 
+            public static function deleteMenu(Menu $menu): bool
+            {
+                return $menu->forceDelete(); // Use forceDelete() for hard delete
+            }
+
 }

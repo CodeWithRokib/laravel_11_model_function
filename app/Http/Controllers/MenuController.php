@@ -20,6 +20,11 @@ class MenuController extends Controller
     {
         // Get paginated results from the database, directly from the query builder
         $menus = Menu::latest()->paginate(10);  // This ensures the latest products are displayed
+        $titles = DB::table('menus')->pluck('name');
+ 
+        foreach ($titles as $title) {
+            echo $title;
+        }
     
         return view('practice.menu.index', compact('menus'));
     }
@@ -76,8 +81,13 @@ class MenuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Menu $menu): RedirectResponse
     {
-        
+        try {
+            Menu::deleteMenu($menu);
+            return redirect()->route('menus.index')->with('success', 'Menu deleted successfully!');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', 'Failed to delete menu : ' . $e->getMessage());
+        }
     }
 }
