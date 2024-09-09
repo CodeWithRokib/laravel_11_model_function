@@ -43,9 +43,9 @@ class MenuController extends Controller
     public function store(MenuRequest $request): RedirectResponse
     {
         try {
-            $validatedData = $request->validated();
+            // $validatedData = $request->validated();
             DB::beginTransaction();
-            $product = Menu::storeMenu($validatedData);
+            $product = (new Menu())->storeMenu($request);
             DB::commit();
             return redirect()->route('menus.index')->with('success', 'Menu created successfully!');
         } catch (\Throwable $e) {

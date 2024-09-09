@@ -9,6 +9,8 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\View\View;
+
 
 
 class ProductController extends Controller
@@ -36,10 +38,11 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request): RedirectResponse
     {
+        // dd($request->all());
         try {
-            $validatedData = $request->validated();
+            
             DB::beginTransaction();
-            $product = Product::storeProduct($validatedData);
+            $product = (new Product())->storeProduct($request);        
             DB::commit();
             // DB::beginTransaction();
             // $menu     = (new Menu())->store_menu($request);
@@ -74,7 +77,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('products.edit', compact('product'));
+        return view('practice.product.edit', compact('product'));
     }
 
     /**
@@ -88,12 +91,12 @@ class ProductController extends Controller
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
         try {
-            $validatedData = $request->validated();
-            DB::beginTransaction();
-            Product::updateProduct($product, $validatedData);
-            DB::commit();
 
+            DB::beginTransaction();
+            (new Product())->updateProduct($request, $product);
+            DB::commit();
             return redirect()->route('products.index')->with('success', 'Product updated successfully!');
+
         } catch (\Throwable $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Failed to update product: ' . $e->getMessage());
@@ -108,7 +111,9 @@ class ProductController extends Controller
     public function destroy(Product $product): RedirectResponse
     {
         try {
-            Product::deleteProduct($product);
+            DB::beginTransaction();
+            (new Product())->deleteProduct($product);
+            DB::commit();
             return redirect()->route('products.index')->with('success', 'Product deleted successfully!');
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', 'Failed to delete product: ' . $e->getMessage());

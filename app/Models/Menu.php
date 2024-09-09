@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class Menu extends Model
 {
@@ -18,9 +20,20 @@ class Menu extends Model
             'status',
             ];
 
-            public static function storeMenu(array $data): Menu
+            final public function prepare_data(Request $request): array {
+                return  [
+                      "name" => $request->input('name'),
+                      "route" => $request->input('route'),
+                      "icon" => $request->input('icon'),
+                      "sort_order" => $request->input('sort_order'),
+                      "status" => $request->input('status'),
+                    //   "user_id" => auth()->id(),
+                ];
+            }
+
+            final public function storeMenu(Request $request): Builder|Model
             {
-                return self::create($data);
+                return self::query()->create($this->prepare_data($request));
             }
 
                     /**

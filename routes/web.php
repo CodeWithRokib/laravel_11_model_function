@@ -11,3 +11,7 @@ Route::get('/', function () {
 
 Route::resource('products', ProductController::class);
 Route::resource('menus', MenuController::class);
+
+Route::middleware('role:admin,superadmin')->group(function () {
+  
+});

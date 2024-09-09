@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+
 
 
 
@@ -20,6 +23,17 @@ class Product extends Model
         'status',
     ];
 
+    final public function prepare_data(Request $request): array
+    {
+        return [
+            'name'       => $request->input('name'),
+            'description'       => $request->input('description'),
+            'price' => $request->input('price'),
+            'quantity'    => $request->input('quantity'),
+            'status'      => $request->input('status'),
+        ];
+    }
+
     /**
      * Store a new product.
      *
@@ -28,11 +42,11 @@ class Product extends Model
      * @throws ValidationException
      */
 
-    public static function storeProduct(array $data): Product
+    final public function storeProduct(Request $request): Builder|Model
     {
-        return self::create($data);
+        return self::query()->create($this->prepare_data($request));
     }
-
+   
     /**
      * Update an existing product.
      *
@@ -42,9 +56,13 @@ class Product extends Model
      * @throws ValidationException
      */
 
-    public static function updateProduct(Product $product, array $data): bool
+    // public static function updateProduct(Product $product, array $data): bool
+    // {
+    //     return $product->update($data);
+    // }
+    final public function updateProduct(Request $request, Product|Model $product): bool
     {
-        return $product->update($data);
+        return $product->update($this->prepare_data($request));
     }
 
     /**
@@ -67,7 +85,7 @@ class Product extends Model
     }
 
 
-    public static function deleteProduct(Product $product): bool
+    final public function deleteProduct(Product $product): bool
     {
         return $product->forceDelete(); // Use forceDelete() for hard delete
     }
