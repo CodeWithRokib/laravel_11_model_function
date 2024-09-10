@@ -15,8 +15,16 @@ class SubCategoryController extends Controller
 
     public function index()
     {
+        $cms_content = [
+            'module'       => __('SubCategory'),
+            'module_url'   => route('subcategories.index'),
+            'active_title' => __('List'),
+            'button_type'  => 'create',
+            'button_title' => __('SubCategory Create'),
+            'button_url'   => route('subcategories.create'),
+        ];
         $subcategories = SubCategory::all();
-        return view('practice.subcategory.index', compact('subcategories'));
+        return view('practice.subcategory.index', compact('subcategories','cms_content'));
     }
 
     /**
@@ -88,7 +96,7 @@ class SubCategoryController extends Controller
             (new SubCateogry())->deleteSubCategory($subcategory);
             DB::commit();
             return redirect()->back()->with('success','Sub Category Deleted Successfully');
-            
+
         } catch (\Throwable $th) {
             DB::rollback();
             return redirect()->back()->with('error',"Failed to Deleted SubCategory".$e->getMessage());

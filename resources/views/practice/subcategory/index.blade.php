@@ -1,3 +1,5 @@
+<h1>{{ $cms_content['module'] }}</h1>
+<a href="{{ $cms_content['button_url'] }}" class="btn btn-primary">{{ $cms_content['button_title'] }}</a>
 
 <div class="container">
     <div class="row mb-3">

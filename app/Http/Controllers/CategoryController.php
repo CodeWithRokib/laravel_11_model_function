@@ -19,7 +19,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        // $categories = Category::all();
+        $categories = (new Category())->getAllCategories();
         return view('practice.category.index',compact('categories'));
 
     }

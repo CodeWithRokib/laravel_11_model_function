@@ -20,6 +20,10 @@ class Category extends Model
           ];
     }
 
+    final public function getAllCategories(){
+        return $this->all();
+    }
+
     final public function storeCategory(Request $request): Builder|Model 
     {
          return self::query()->create($this->prepare_data($request));
