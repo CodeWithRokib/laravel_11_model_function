@@ -7,9 +7,9 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\View\View;
 
 
 class ProductController extends Controller
@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
         // Fetch all products for listing
         $products = Product::where('status', 1)->paginate(10);
-    
+
         $totalQuantity = (new Product())->totalActiveQuantity();
         $totalPrice = (new Product())->totalActivePrice();
 
@@ -38,9 +38,9 @@ class ProductController extends Controller
     {
         // dd($request->all());
         try {
-            
+
             DB::beginTransaction();
-            $product = (new Product())->storeProduct($request);        
+            $product = (new Product())->storeProduct($request);
             DB::commit();
             // DB::beginTransaction();
             // $menu     = (new Menu())->store_menu($request);

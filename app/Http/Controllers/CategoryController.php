@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -94,6 +93,6 @@ class CategoryController extends Controller
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', 'Failed to delete product: ' . $e->getMessage());
         }
-    
+
     }
 }
