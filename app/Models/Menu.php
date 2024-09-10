@@ -45,7 +45,7 @@ class Menu extends Model
              * @throws ValidationException
              */
 
-            final public function updateMenu(Request $request, Memu|Model $menu): bool
+            final public function updateMenu(Request $request, Menu|Model $menu): bool
             {
                 return $menu->update($this->prepare_data($request));
             }
