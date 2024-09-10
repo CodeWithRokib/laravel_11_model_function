@@ -93,7 +93,7 @@ class SubCategoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            (new SubCateogry())->deleteSubCategory($subcategory);
+            (new SubCategory())->deleteSubCategory($subcategory);
             DB::commit();
             return redirect()->back()->with('success','Sub Category Deleted Successfully');
 
