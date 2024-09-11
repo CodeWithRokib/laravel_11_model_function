@@ -22,18 +22,7 @@
                         </div>
                     @endif
 
-                    {{-- Edit Product Form --}}
-                    {{-- <form method="POST" action="{{ route('categories.update', $category->id) }}">
-                        @csrf
-                        @method('PUT') --}}
-
-
-
-                        {{-- Submit Button --}}
-                        {{-- <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary">Update Category</button>
-                        </div>
-                    </form> --}}
+                    
                     {{html()->modelForm($category,'put',route('categories.update',$category->id))->id('create_form')->open()}}
                     <div class="row justify-content-center align-items-end">
                         @include('practice.category.partials.form')
