@@ -22,19 +22,21 @@ class SubCategory extends Model
        ];
     }
 
-    public function storeSubCategory(Request $request): Builder|Model 
+    public function storeSubCategory(Request $request): Builder|Model
     {
         return self::query()->create($this->prepare_data($request));
     }
-    
+
     public function updateSubCategory(Request $request, SubCategory|Model $subcategory): bool
     {
-        return $subcategory->update($this->prepare_data($request));
+        return $subcategory->update(attributes: $this->prepare_data($request));
     }
 
-    public function deleteSubCategory(SubCategory $subcategory): bool 
+    public function deleteSubCategory(SubCategory $subcategory): bool
     {
         return $subcategory->forceDelete();
     }
+
+    
 
 }
