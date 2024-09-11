@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title')
+  edit menu
+@endsection
+@section('content')
 
 <div class="container">
     <div class="row justify-content-center">
@@ -16,28 +21,30 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
-                        @csrf
+                    {{-- <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+                        @csrf --}}
 
                         {{-- Product Name --}}
                         {{-- <div class="form-group">
                             <label for="name">Product Name</label>
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}" >
                         </div> --}}
-                        <div class="col-md-6 mb-4">
-                            <div class="custom-form-group">
-                                {{html()->label('Category Name', 'name')}}
-                                {{html()->text('name')->class('form-control form-control-sm'. ($errors->has('name') ? 'is-invalid' : ''))->placeholder(__('Enter category name'))}}
 
-                            </div>
-                        </div>
 
                         {{-- Submit Button --}}
-                        <button type="submit" class="btn btn-primary">Create Category</button>
-                    </form>
+                        {{-- <button type="submit" class="btn btn-primary">Create Category</button>
+                    </form> --}}
+                    {{html()->form('post',route('categories.store'))->id('create_form')->open()}}
+                    <div class="row justify-content-center align-items-end">
+                        @include('practice.category.partials.form')
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Create Category</button>
+                        </div>
+                    </div>
+                    {{html()->form()->close()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+@endsection

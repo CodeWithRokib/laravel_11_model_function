@@ -80,9 +80,9 @@ class SubCategoryController extends Controller
            (new SubCategory())->updateSubCategory($request, $subcategory);
            DB::commit();
            return redirect()->route('subcategories.index')->with('success', 'SubCategory updated successfully!');
-        } catch (\Throwable $th) {
+        } catch (\Throwable $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Failed to updated subCategory: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Failed to create product: ' . $e->getMessage());
         }
     }
 
@@ -97,9 +97,9 @@ class SubCategoryController extends Controller
             DB::commit();
             return redirect()->back()->with('success','Sub Category Deleted Successfully');
 
-        } catch (\Throwable $th) {
+        } catch (\Throwable $e) {
             DB::rollback();
-            return redirect()->back()->with('error',"Failed to Deleted SubCategory".$e->getMessage());
+            return redirect()->back()->with('error', 'Failed to create product: ' . $e->getMessage());
         }
     }
 }

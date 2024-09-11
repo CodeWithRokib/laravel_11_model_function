@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title')
+  edit menu
+@endsection
+@section('content')
 
 <div class="container">
     <div class="row mb-3">
@@ -60,3 +65,4 @@
     </div>
 </div>
 
+@endsection

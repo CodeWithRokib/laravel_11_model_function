@@ -20,12 +20,8 @@ class MenuController extends Controller
     {
         // Get paginated results from the database, directly from the query builder
         $menus = Menu::latest()->paginate(10);  // This ensures the latest products are displayed
-        $titles = DB::table('menus')->pluck('name');
- 
-        foreach ($titles as $title) {
-            echo $title;
-        }
-    
+
+
         return view('practice.menu.index', compact('menus'));
     }
 
@@ -59,7 +55,7 @@ class MenuController extends Controller
      */
     public function show(string $id)
     {
-        
+
     }
 
     /**
@@ -68,7 +64,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         return view('practice.menu.edit',compact('menu'));
-    } 
+    }
 
     /**
      * Update the specified resource in storage.

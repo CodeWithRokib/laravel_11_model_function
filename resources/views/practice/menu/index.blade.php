@@ -1,4 +1,8 @@
-=
+@extends('layouts.app')
+@section('title')
+   menu
+@endsection
+@section('content')
 <div class="container">
     <h1 class="my-4">Menus</h1>
 
@@ -19,7 +23,7 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Menu ID</th>
+
                 <th>Name</th>
                 <th>Route</th>
                 <th>Icon</th>
@@ -31,7 +35,7 @@
         <tbody>
             @foreach($menus as $menu)
                 <tr>
-                    <td>{{ $menu->menu_id }}</td>
+                  
                     <td>{{ $menu->name }}</td>
                     <td>{{ $menu->route }}</td>
                     <td>{{ $menu->icon }}</td>
@@ -46,11 +50,12 @@
                         </form>
                     </td>
                 </tr>
-               
+
             @endforeach
         </tbody>
     </table>
 
     {{ $menus->links() }} <!-- Pagination links -->
 </div>
-=
+
+@endsection

@@ -26,5 +26,5 @@ Route::resource('categories', CategoryController::class);
 Route::resource('subcategories', SubCategoryController::class);
 
 Route::middleware('role:admin,superadmin')->group(function () {
-  
+
 });

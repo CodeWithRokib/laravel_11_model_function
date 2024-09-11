@@ -1,3 +1,9 @@
+@extends('layouts.app')
+@section('title')
+  edit menu
+@endsection
+@section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -17,24 +23,28 @@
                     @endif
 
                     {{-- Edit Product Form --}}
-                    <form method="POST" action="{{ route('categories.update', $category->id) }}">
+                    {{-- <form method="POST" action="{{ route('categories.update', $category->id) }}">
                         @csrf
-                        @method('PUT')
+                        @method('PUT') --}}
 
-                        {{-- Product Name --}}
-                        <div class="form-group">
-                            <label for="name">CAtegory Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name', $category->name) }}" required>
-                        </div>
 
-                       
+
                         {{-- Submit Button --}}
-                        <div class="form-group text-center">
+                        {{-- <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary">Update Category</button>
                         </div>
-                    </form>
+                    </form> --}}
+                    {{html()->modelForm($category,'put',route('categories.update',$category->id))->id('create_form')->open()}}
+                    <div class="row justify-content-center align-items-end">
+                        @include('practice.category.partials.form')
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Update Category</button>
+                        </div>
+                    </div>
+                    {{html()->form()->close()}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection

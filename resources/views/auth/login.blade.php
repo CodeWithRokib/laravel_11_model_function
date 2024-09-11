@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('title')
+  login
+@endsection
+@section('content')
 
 <div class="container">
     <h1>Login</h1>
@@ -29,3 +34,4 @@
     </form>
 </div>
 
+@endsection

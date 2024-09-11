@@ -1,49 +1,38 @@
+@extends('layouts.app')
+@section('title')
+  edit menu
+@endsection
+@section('content')
 
 <div class="container">
-    <h1>Create Subcategory</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Create New SubCategory</div>
 
-    {{-- Display validation errors --}}
-    @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    {{html()->form('post',route('subcategories.store'))->id('create_form')->open()}}
+                    <div class="row justify-content-center align-items-end">
+                        @include('practice.subcategory.partials.form')
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary">Create SubCategory</button>
+                        </div>
+                    </div>
+                    {{html()->form()->close()}}
+                </div>
+            </div>
         </div>
-    @endif
-
-    {{-- Subcategory Creation Form --}}
-    <form action="{{ route('subcategories.store') }}" method="POST">
-        @csrf
-
-        {{-- Subcategory Name --}}
-        <div class="form-group mb-3">
-            <label for="name">Subcategory Name</label>
-            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" >
-            @error('name')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        {{-- Category Selection --}}
-        <div class="form-group mb-3">
-            <label for="category_id">Category</label>
-            <select name="category_id" class="form-control @error('category_id') is-invalid @enderror">
-                <option value="" disabled selected>Select a category</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-            @error('category_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-
-        {{-- Submit Button --}}
-        <button type="submit" class="btn btn-primary">Create Subcategory</button>
-    </form>
+    </div>
 </div>
 
+@endsection
