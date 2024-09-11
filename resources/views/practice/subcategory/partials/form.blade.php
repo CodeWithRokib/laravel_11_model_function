@@ -1,25 +1,19 @@
+<div class="col-md-6 mb-4">
+    <div class="custom-form-group">
+        {{html()->label('Sub Category Name', 'name')}}
+        {{html()->text('name')->class('form-control form-control-sm'. ($errors->has('name') ? 'is-invalid' : ''))->placeholder(__('Enter subcategory name'))}}
 
-    {{-- Subcategory Name --}}
-    <div class="form-group mb-3">
-        {!! html()->label('Subcategory Name', 'name') !!}
-        {!! html()->text('name')
-            ->class('form-control' . ($errors->has('name') ? ' is-invalid' : ''))
-            ->value(old('name')) !!}
-        @error('name')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+    </div>
+</div>
+
     </div>
 
     {{-- Category Selection --}}
     <div class="form-group mb-3">
         {!! html()->label('Category', 'category_id') !!}
-        {!! html()->select('category_id', $categories->pluck('name', 'id'))
+        {{ html()->select('category_id', $categories->pluck('name', 'id'))
             ->placeholder('Select a category')
-            ->class('form-control' . ($errors->has('category_id') ? ' is-invalid' : ''))
-            ->value(old('category_id')) !!}
-        @error('category_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+            ->class('form-control form-control-sm'. ($errors->has('name') ? 'is-invalid' : ''))->placeholder(__('Enter subcategory name'))}}
     </div>
 
 
